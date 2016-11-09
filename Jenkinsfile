@@ -6,8 +6,7 @@ node{
     sh 'sonar-scanner'
   }
   stage('build'){
-    def mvnHome = tool 'M3'
-    sh "${mvnHome}/bin/mvn -B clean package"
+    npm install
   }
   stage('deploy'){
     sh "docker stop ProjectRisk || true"
