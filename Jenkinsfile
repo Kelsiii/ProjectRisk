@@ -6,7 +6,7 @@ node{
     sh 'sonar-scanner'
   }
   stage('build'){
-    npm install
+    sh 'npm install'
   }
   stage('deploy'){
     sh "docker stop ProjectRisk || true"
