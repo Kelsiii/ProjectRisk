@@ -6,7 +6,7 @@ node{
     sh 'sonar-scanner'
   }
   stage('build'){
-    sh 'npm install'
+    
   }
   stage('deploy'){
     sh "docker stop bea0 || true"
