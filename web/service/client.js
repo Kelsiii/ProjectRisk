@@ -23,7 +23,7 @@ export default {
 
 	queryProjects(ctx){
 		let filters = { must:[] };
-    let size = 20;
+    let size = 30;
 		if(ctx){
 			if(ctx.type === 'current'){
 				filters.must.push({
