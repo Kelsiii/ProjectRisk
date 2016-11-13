@@ -3,7 +3,7 @@ node{
     git 'https://github.com/Kelsiii/ProjectRisk'
   }
   stage('QA'){
-    sh 'sonar-scanner'
+    
   }
   stage('build'){
     
