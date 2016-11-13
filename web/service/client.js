@@ -211,7 +211,7 @@ export default {
             bool: filters
           },
           size,
-					sort: [{ 'created': 'desc' }]
+					sort: [{ 'date': 'desc' }]
         }
       }).then(resp => {
         if (resp.hits.hits.length) {

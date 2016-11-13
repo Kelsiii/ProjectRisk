@@ -63,7 +63,7 @@ const ps = (prefix, target) => {
     ctx.respond = false
   }))
 }
-ps('/service/es', 'http://127.0.0.1:9200/')
+ps('/service/es', 'http://114.215.93.196:9200//')
 
 router.get('/admin/session', ctx =>{
   ctx.body = 'session';
