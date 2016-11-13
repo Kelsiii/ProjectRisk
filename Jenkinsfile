@@ -9,7 +9,7 @@ node{
     
   }
   stage('deploy'){
-    sh "docker stop 3121 || true"
-    sh "docker start 3121"
+    sh "docker stop f40e || true"
+    sh "docker start f40e"
   }
 }
