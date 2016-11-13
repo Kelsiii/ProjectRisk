@@ -5,14 +5,40 @@ import {
   MenuItem,
 } from 'react-bootstrap'
 import 'whatwg-fetch'
+import session from './service/session'
+import Client from './service/client'
 
 export default class Wrapper extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { theme: 'auto' }
+    this.state = {
+			currentProject: 0
+		}
+  }
+
+  componentWillMount() {
+    session.isAuthenticated().then(isAuthenticated => {
+      if (!isAuthenticated) {
+        this.context.router.push('/login');
+      }
+    })
   }
 
   componentDidMount() {
+    console.log('login as : '+session.username());
+    Client.stat().then(resp => {
+			let projectStatus = resp.aggregations.status.buckets;
+			projectStatus.forEach(status => {
+				if(status.key === 'underway'){
+					this.setState({ currentProject:status.doc_count });
+				}
+			});
+		})
+  }
+
+  logout() {
+    session.clear();
+    this.context.router.push('/login');
   }
 
   render() {
@@ -30,16 +56,16 @@ export default class Wrapper extends React.Component {
 
               <ul className="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
                 <li>
-                  <button style={{marginTop:"7px"}} className="am-btn am-btn-primary"><i className="am-icon-envelope-o"></i> 收件箱 <i className="am-badge am-badge-warning">5</i></button>
+                  <button style={{marginTop:"7px"}} className="am-btn am-btn-primary"><i className="am-icon-envelope-o"></i> 收件箱 </button>
                 </li>
                 <li className="am-dropdown" data-am-dropdown>
                   <button style={{marginTop:"7px"}} className="am-btn am-btn-primary am-dropdown-toggle" data-am-dropdown-toggle>
-                    <i className="am-icon-users"></i> 管理员 <i className="am-icon-caret-down"></i>
+                    <i className="am-icon-users"></i> {session.username()} <i className="am-icon-caret-down"></i>
                   </button>
                   <ul className="am-dropdown-content">
                     <li><a href="#"><span className="am-icon-user"></span> 资料</a></li>
                     <li><a href="#"><span className="am-icon-cog"></span> 设置</a></li>
-                    <li><a href="#"><span className="am-icon-power-off"></span> 退出</a></li>
+                    <li><a href="#" onClick={()=>{this.logout()}}><span className="am-icon-power-off"></span> 退出</a></li>
                   </ul>
                 </li>
               </ul>
@@ -53,13 +79,13 @@ export default class Wrapper extends React.Component {
                 <li className="admin-parent">
                   <a className="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span className="am-icon-file"></span> 项目 <span className="am-icon-angle-right am-fr am-margin-right"></span></a>
                   <ul className="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                    <li><a href="/#current"><span className="am-icon-hourglass"></span> 正在进行<span className="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+                    <li><a href="/#current"><span className="am-icon-hourglass"></span> 正在进行<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
                     <li><a href="/#all" className="am-cf"><span className="am-icon-th"></span> 所有项目<span className="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                     <li><a href="/#add"><span className="am-icon-pencil-square-o"></span> 添加</a></li>
+                <li><a href="/#users"><span className="am-icon-user"></span> 成员</a></li>
                   </ul>
                 </li>
-                <li><a href="admin-form.html"><span className="am-icon-user"></span> 用户</a></li>
-                <li><a href="admin-help.html"><span className="am-icon-puzzle-piece"></span> 帮助</a></li>
+                <li><a href="#"><span className="am-icon-puzzle-piece"></span> 帮助</a></li>
               </ul>
             </div>
           </div>

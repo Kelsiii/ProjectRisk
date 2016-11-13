@@ -8,10 +8,13 @@ import {
 } from 'react-router'
 import Wrapper from './wrapper'
 import Apps from './apps/dashboard'
-import Login from './login'
+import Login from './apps/login'
 import Current from './apps/current-list'
 import Add from './apps/add'
 import All from './apps/all-list'
+import Completed from './apps/completed-list'
+import Users from './apps/user-list'
+import Project from './apps/component/project'
 
 render(
   <Router history={ hashHistory }>
@@ -22,7 +25,11 @@ render(
       <Route path='login' component={Login}/>
       <Route path='current' component={Current}/>
       <Route path='all' component={All}/>
+      <Route path='completed' component={Completed}/>
       <Route path='add' component={Add}/>
+      <Route path='users' component={Users}/>
+      <Route path='project/:id' component={Project}/>
+
     </Route>
   </Router>,
   document.querySelector('.wrapper')

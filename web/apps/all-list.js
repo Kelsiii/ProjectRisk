@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import List from './list'
+import List from './component/list'
 
-export default class Current extends React.Component {
+export default class All extends React.Component {
   constructor(props) {
     super(props);
   };
@@ -15,7 +15,7 @@ export default class Current extends React.Component {
 
 				<div className="am-g">
 					<div className="am-u-sm-12">
-						<List />
+						<List type='all'/>
 					</div>
 				</div>
 			</div>
