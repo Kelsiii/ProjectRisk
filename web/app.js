@@ -16,6 +16,7 @@ import All from './apps/all-list'
 import Completed from './apps/completed-list'
 import Users from './apps/user/user-list'
 import UserAdd from './apps/user/user-add'
+import UserInfo from './apps/user/user-info'
 import Project from './apps/component/project'
 
 render(
@@ -31,7 +32,7 @@ render(
       <Route path='add' component={Add}/>
       <Route path='users' component={Users}/>
       <Route path='users/add' component={UserAdd}/>
-      <Route path='userAdd' component ={UserAdd}/>
+      <Route path='userinfo' component={UserInfo}/>
       <Route path='project/:id' component={Project}/>
 
     </Route>
