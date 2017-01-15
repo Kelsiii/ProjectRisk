@@ -7,11 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name='description' content='Capacity Console'>
 	<meta name='author' content='yiyazhou@ebay.com'>
-	<link rel='stylesheet' href='vendor/bootstrap/dist/css/bootstrap.min.css'>
-	<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+	<link rel='stylesheet' href='vendors/bootstrap/dist/css/bootstrap.min.css'>
+	<link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
 	<link href="https://fonts.lug.ustc.edu.cn/css?family=Open+Sans:400,600" rel="stylesheet">
-	<link rel="alternate icon" type="image/png" href="vendor/amazeui/dist/i/favicon.png">
-	<link rel="stylesheet" href="vendor/amazeui/dist/css/amazeui.min.css"/>
+	<link rel="alternate icon" type="image/png" href="vendors/amazeui/dist/i/favicon.png">
+	<link rel="stylesheet" href="vendors/amazeui/dist/css/amazeui.min.css"/>
 	<link rel="stylesheet" href="css/admin.css"/>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,23 +35,12 @@
 </head>
 <body>
 
-<script src='vendor/jquery/dist/jquery.min.js'></script>
-<script src='vendor/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='vendors/jquery/dist/jquery.min.js'></script>
+<script src='vendors/bootstrap/dist/js/bootstrap.min.js'></script>
 <script type="text/javascript">
 'use strict';
 let intervalID;
-$(window).load(function() {
-		let additionalDropdown = `<li class="dropdown">
-			<a href="#" id="consoles" class="dropdown-toggle" data-toggle="dropdown">
-				<i class="icon-hdd icon-white"></i>Console<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li><a href="https://capcon.stratus.ebay.com">Capacity</a></li>
-				<li><a href="https://archon.stratus.qa.ebay.com">LB Rebalance</a></li>
-		`
-		additionalDropdown += '</ul></li>';
-		intervalID = setInterval(function() {checkNavBarLoaded(additionalDropdown)}, 100);
-});
+
 
 function checkNavBarLoaded(additionalDropdown) {
 	if ($("ul.nav.pull-right").length) {
@@ -62,6 +51,6 @@ function checkNavBarLoaded(additionalDropdown) {
 </script>
 <div class='wrapper'></div>
 <script src='app.bundle.js'></script>
-<script src="vendor/amazeui/dist/js/amazeui.min.js"></script>
+<script src="vendors/amazeui/dist/js/amazeui.min.js"></script>
 </body>
 </html>

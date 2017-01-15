@@ -63,7 +63,7 @@ const ps = (prefix, target) => {
     ctx.respond = false
   }))
 }
-ps('/service/es', 'http://114.215.93.196:9200//')
+ps('/service/es', 'http://localhost:9200//')
 
 router.get('/admin/session', ctx =>{
   ctx.body = 'session';
@@ -94,7 +94,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(mount('/vendor', serve('node_modules')));
+app.use(mount('/vendors', serve('node_modules')));
 app.use(serve('web'));
 
 

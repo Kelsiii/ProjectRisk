@@ -4,7 +4,8 @@ import {
   hashHistory,
   IndexRedirect,
   Router,
-  Route
+  Route,
+  IndexRoute
 } from 'react-router'
 import Wrapper from './wrapper'
 import Apps from './apps/dashboard'
@@ -13,7 +14,8 @@ import Current from './apps/current-list'
 import Add from './apps/add'
 import All from './apps/all-list'
 import Completed from './apps/completed-list'
-import Users from './apps/user-list'
+import Users from './apps/user/user-list'
+import UserAdd from './apps/user/user-add'
 import Project from './apps/component/project'
 
 render(
@@ -28,6 +30,8 @@ render(
       <Route path='completed' component={Completed}/>
       <Route path='add' component={Add}/>
       <Route path='users' component={Users}/>
+      <Route path='users/add' component={UserAdd}/>
+      <Route path='userAdd' component ={UserAdd}/>
       <Route path='project/:id' component={Project}/>
 
     </Route>

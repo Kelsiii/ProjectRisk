@@ -1,0 +1,7 @@
+node_modules
+web/js
+web/css
+web/vendors
+.idea/
+web/app.bundle.js
+log/*

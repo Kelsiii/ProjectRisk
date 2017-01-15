@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import {FormGroup, FormControl} from 'react-bootstrap'
-import Table from './component/table'
-import session from '../service/session'
+import Table from '../component/table'
+import session from '../../service/session'
 
 export default class Current extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class Current extends React.Component {
 		return (
 			<div className="admin-content-body">
 				<div className="am-cf am-padding am-padding-bottom-0">
-					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目</strong> / <small>成员</small></div>
+					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">员工</strong> / <small>全部</small></div>
 				</div>
 
 				<hr/>

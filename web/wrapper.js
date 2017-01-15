@@ -80,11 +80,13 @@ export default class Wrapper extends React.Component {
                   <a className="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span className="am-icon-file"></span> 项目 <span className="am-icon-angle-right am-fr am-margin-right"></span></a>
                   <ul className="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
                     <li><a href="/#current"><span className="am-icon-hourglass"></span> 正在进行<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
+                    <li><a href="/#current"><span className="am-icon-archive"></span> 待完善<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
                     <li><a href="/#all" className="am-cf"><span className="am-icon-th"></span> 所有项目<span className="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                     <li><a href="/#add"><span className="am-icon-pencil-square-o"></span> 添加</a></li>
-                <li><a href="/#users"><span className="am-icon-user"></span> 成员</a></li>
                   </ul>
                 </li>
+                <li><a href="/#users"><span className="am-icon-user"></span> 员工</a></li>
+                <li><a href="#"><span className="am-icon-cogs"></span> 设置</a></li>
                 <li><a href="#"><span className="am-icon-puzzle-piece"></span> 帮助</a></li>
               </ul>
             </div>
@@ -93,7 +95,7 @@ export default class Wrapper extends React.Component {
             {this.props.children}
             <footer className="admin-content-footer">
               <hr />
-              <p className="am-padding-left">© 2016 XXXXX. Software Institute, NJU.</p>
+              <p className="am-padding-left">© 2017 Jingyi Z. Software Institute, NJU.</p>
             </footer>
           </div>
         </div>

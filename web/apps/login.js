@@ -54,7 +54,7 @@ export default class Login extends React.Component {
         <div className="header">
           <div className="am-g">
             <h1>Risk Console</h1>
-            <p>Risk Management in Project Development<br/>项目规划，项目管理，风险控制，风险状态跟踪</p>
+            <p>Risk Evaluation and Management for Project Investment<br/>项目规划，风险评估，投资决策，风险状态跟踪</p>
           </div>
           <hr />
         </div>
@@ -81,7 +81,7 @@ export default class Login extends React.Component {
               </div>
             </form>
             <hr />
-            <p>© 2016 XXXXX. Software Institute, NJU.</p>
+            <p>© 2017 Jingyi Z. Software Institute, NJU.</p>
           </div>
         </div>
       </div>
