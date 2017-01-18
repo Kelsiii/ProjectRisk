@@ -24,7 +24,7 @@ export default class Current extends React.Component {
 					<div className="am-u-sm-12 am-u-md-6">
 						<div className="am-btn-toolbar">
 							<div className="am-btn-group am-btn-group-xs">
-								<button type="button" className="am-btn am-btn-default" disabled={session.id() !== 'admin'}><span className="am-icon-plus"></span> 新增</button>
+								<button type="button" className="am-btn am-btn-default" disabled={session.id() !== 'admin'}><a href="/#/users/add"><span className="am-icon-plus"></span> 新增 </a></button>
 								<button type="button" className="am-btn am-btn-default" disabled={session.id() !== 'admin'}><span className="am-icon-save"></span> 保存</button>
 							</div>
 						</div>

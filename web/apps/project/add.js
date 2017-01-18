@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import {FormGroup, FormControl} from 'react-bootstrap'
-import session from '../service/session'
-import Client from '../service/client'
+import session from '../../service/session'
+import Client from '../../service/client'
 
 export default class Adder extends React.Component {
   constructor(props) {
@@ -69,16 +69,18 @@ export default class Adder extends React.Component {
 							</div>
 
 							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">所属类别</div>
+								<div className="am-u-sm-4 am-u-md-2 am-text-right">所属行业</div>
 								<div className="am-u-sm-8 am-u-md-10 am-lg-10">
 									<FormGroup controlId='spec'>
 									<FormControl componentClass='select' value={this.state.type} style={ {width: '150px'} }
 									onChange={e => { this.setState({ type: e.target.value }); }}>
-										<option value="product">业务产品</option>
-										<option value="infrastructure">基础架构</option>
-										<option value="refactor">系统重构</option>
-										<option value="business_intelligence">商业智能</option>
-										<option value="user_experience">用户体验</option>
+										<option value="product">金融证券</option>
+										<option value="infrastructure">高新技术</option>
+										<option value="refactor">新能源</option>
+										<option value="business_intelligence">信息产业</option>
+										<option value="user_experience">文体娱乐</option>
+										<option value="user_experience">教育</option>
+										<option value="user_experience">外资合作</option>
 									</FormControl>
 								</FormGroup>
 									
@@ -90,19 +92,19 @@ export default class Adder extends React.Component {
 								<div className="am-u-sm-8 am-u-md-10">
 									<div className="am-btn-group" data-am-button>
 										<button className="am-btn am-btn-default am-btn-xs am-active" onClick = {() => {this.setState({ status: 'unopend' })}}>
-											<input type="radio" name="options" id="unopend"/> 未启动
+											<input type="radio" name="options" id="unopend"/> 待考察
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'underway' })}}>
-											<input type="radio" name="options" id="underway" /> 进行中
+											<input type="radio" name="options" id="underway" /> 洽谈中
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'paused' })}}>
-											<input type="radio" name="options" id="paused" /> 暂停
+											<input type="radio" name="options" id="paused" /> 待评估
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'canceled' })}}>
-											<input type="radio" name="options" id="canceled" /> 取消
+											<input type="radio" name="options" id="canceled" /> 暂缓
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'completed' })}}>
-											<input type="radio" name="options" id="completed" /> 完成
+											<input type="radio" name="options" id="completed" /> 已投资
 										</button>
 									</div>
 								</div>
@@ -138,7 +140,7 @@ export default class Adder extends React.Component {
 
 								<div className="am-g am-margin-top">
 									<div className="am-u-sm-4 am-u-md-2 am-text-right">
-										团队
+										所属部门
 									</div>
 									<div className="am-u-sm-8 am-u-md-4 am-u-end col-end">
 										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ team: e.target.value }); }}/>
