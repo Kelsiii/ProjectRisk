@@ -44,10 +44,10 @@ export default {
       }).then(json => {
         if (json && json.id) {
           if (remember) {
-            Cookies.set(USER, json.username, { expires: 1});
+            Cookies.set(USER, json.name, { expires: 1});
 						Cookies.set(SESSION, json.id, { expires: 1});
           } else {
-            Cookies.set(USER, json.username);
+            Cookies.set(USER, json.name);
 						Cookies.set(SESSION, json.id);
           }
           resolve(json.id);

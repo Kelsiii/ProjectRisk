@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap'
 import $ from 'jquery'
 import session from '../service/session'
+import { hex_sha1 } from '../service/sha1'
 require('icheck')
 
 export default class Login extends React.Component {
@@ -39,7 +40,8 @@ export default class Login extends React.Component {
       obj[item.name] = item.value;
       return obj;
     }, {});
-    session.authenticate(data.username, data.password).then((sessionId) => {
+    var pwd = hex_sha1(data.password);
+    session.authenticate(data.username, pwd).then((sessionId) => {
       console.log(`Authenticated as ${sessionId}`);
       this.context.router.push('/');
     }, (err) => {
