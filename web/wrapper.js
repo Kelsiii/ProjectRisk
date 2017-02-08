@@ -86,7 +86,7 @@ export default class Wrapper extends React.Component {
                   </ul>
                 </li>
                 <li><a href="/#users"><span className="am-icon-user"></span> 员工</a></li>
-                <li><a href="#"><span className="am-icon-cogs"></span> 设置</a></li>
+                <li><a href="#userinfo"><span className="am-icon-cogs"></span> 设置</a></li>
                 <li><a href="#"><span className="am-icon-puzzle-piece"></span> 帮助</a></li>
               </ul>
             </div>

@@ -7,7 +7,7 @@ export default class Current extends React.Component {
   constructor(props) {
     super(props);
 		this.state = {
-			type: 'all'
+			department: 'all'
 		}
   };
 
@@ -31,7 +31,7 @@ export default class Current extends React.Component {
 					</div>
 					<div className="am-u-sm-12 am-u-md-3">
 						<div className="am-form-group">
-							<FormControl componentClass='select' value={this.state.type} onChange={e => { this.setState({ type: e.target.value }); }}>
+							<FormControl componentClass='select' value={this.state.department} onChange={e => { this.setState({ department: e.target.value }); }}>
 								<option value="all">所有类别</option>
 								<option value="PM">PM</option>
 								<option value="Engineer">Engineer</option>
@@ -43,9 +43,9 @@ export default class Current extends React.Component {
 					</div>
 					<div className="am-u-sm-12 am-u-md-3">
 						<div className="am-input-group am-input-group-sm">
-							<input type="text" className="am-form-field" />
+						<input type="text" className="am-form-field" />
 						<span className="am-input-group-btn">
-							<button className="am-btn am-btn-default" type="button">搜索</button>
+						<button className="am-btn am-btn-default" type="button">搜索</button>
 						</span>
 						</div>
 					</div>
@@ -53,7 +53,7 @@ export default class Current extends React.Component {
 
 				<div className="am-g">
 					<div className="am-u-sm-12">
-						<Table usertype={this.state.type}/>
+						<Table department={this.state.department}/>
 					</div>
 				</div>
 				
