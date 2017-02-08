@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react'
 import {FormGroup, FormControl} from 'react-bootstrap'
 import session from '../../service/session'
-import Client from '../../service/client'
+import Client from '../../service/project-client'
 
 export default class Adder extends React.Component {
   constructor(props) {
     super(props);
 		this.state = {
 			name : '',
-			type : 'product',
+			industry : 'finance',
 			status: 'unopend',
 			date: '',
 			owner: session.username(),
-			team: '',
+			department: '',
 			description: ''
 		}
   };
@@ -22,13 +22,12 @@ export default class Adder extends React.Component {
 		let project = {
 			id : Date.now().toString(36),
 			name : this.state.name,
-			type : this.state.type,
+			industry : this.state.industry,
 			status: this.state.status,
 			date: this.state.date,
 			owner: this.state.owner,
-			team: this.state.team,
+			department: this.state.department,
 			description: this.state.description,
-			riskNum : 0,
 			'created' : now.toLocaleDateString().replace(/\//g,"-")+' '+now.toTimeString().substring(0,8)
 		};
 		Client.addProject(project).then(resp => {
@@ -72,15 +71,15 @@ export default class Adder extends React.Component {
 								<div className="am-u-sm-4 am-u-md-2 am-text-right">所属行业</div>
 								<div className="am-u-sm-8 am-u-md-10 am-lg-10">
 									<FormGroup controlId='spec'>
-									<FormControl componentClass='select' value={this.state.type} style={ {width: '150px'} }
-									onChange={e => { this.setState({ type: e.target.value }); }}>
-										<option value="product">金融证券</option>
-										<option value="infrastructure">高新技术</option>
-										<option value="refactor">新能源</option>
-										<option value="business_intelligence">信息产业</option>
-										<option value="user_experience">文体娱乐</option>
-										<option value="user_experience">教育</option>
-										<option value="user_experience">外资合作</option>
+									<FormControl componentClass='select' value={this.state.industry} style={ {width: '150px'} }
+									onChange={e => { this.setState({ industry: e.target.value }); }}>
+										<option value="finance">金融证券</option>
+										<option value="technology">高新技术</option>
+										<option value="energy">新能源</option>
+										<option value="IT">信息产业</option>
+										<option value="entertainment">文体娱乐</option>
+										<option value="education">教育</option>
+										<option value="foreign">外资合作</option>
 									</FormControl>
 								</FormGroup>
 									
@@ -98,13 +97,13 @@ export default class Adder extends React.Component {
 											<input type="radio" name="options" id="underway" /> 洽谈中
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'paused' })}}>
-											<input type="radio" name="options" id="paused" /> 待评估
+											<input type="radio" name="options" id="evaluating" /> 待评估
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'canceled' })}}>
-											<input type="radio" name="options" id="canceled" /> 暂缓
+											<input type="radio" name="options" id="paused" /> 暂缓
 										</button>
 										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'completed' })}}>
-											<input type="radio" name="options" id="completed" /> 已投资
+											<input type="radio" name="options" id="invested" /> 已投资
 										</button>
 									</div>
 								</div>
@@ -143,7 +142,7 @@ export default class Adder extends React.Component {
 										所属部门
 									</div>
 									<div className="am-u-sm-8 am-u-md-4 am-u-end col-end">
-										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ team: e.target.value }); }}/>
+										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ department: e.target.value }); }}/>
 									</div>
 								</div>
 
