@@ -9,10 +9,11 @@ export default class Adder extends React.Component {
 		this.state = {
 			name : '',
 			industry : 'finance',
-			status: 'unopend',
+			value: 0,
+			status: 'unfinished',
 			date: '',
 			owner: session.username(),
-			department: '',
+			contact: '',
 			description: ''
 		}
   };
@@ -23,10 +24,11 @@ export default class Adder extends React.Component {
 			id : Date.now().toString(36),
 			name : this.state.name,
 			industry : this.state.industry,
+			value: this.state.value,
 			status: this.state.status,
 			date: this.state.date,
 			owner: this.state.owner,
-			department: this.state.department,
+			contact: this.state.contact,
 			description: this.state.description,
 			'created' : now.toLocaleDateString().replace(/\//g,"-")+' '+now.toTimeString().substring(0,8)
 		};
@@ -64,7 +66,15 @@ export default class Adder extends React.Component {
 								<div className="am-u-sm-8 am-u-md-5 am-u-lg-3">
 									<input type="text" className="am-input-lg" onChange={ e => { this.setState({ name: e.target.value }); }}/>
 								</div>
-								<div className="am-hide-sm-only am-u-md-5 am-u-lg-7">*必填</div>
+							</div>
+							
+							<div className="am-g am-margin-top">
+								<div className="am-u-sm-4 am-u-md-2 am-text-right">
+									申报金额
+								</div>
+								<div className="am-u-sm-8 am-u-md-5 am-u-lg-3">
+									<input type="text" className="am-input-lg" onChange={ e => { this.setState({ value: e.target.value }); }}/>
+								</div>
 							</div>
 
 							<div className="am-g am-margin-top">
@@ -83,29 +93,6 @@ export default class Adder extends React.Component {
 									</FormControl>
 								</FormGroup>
 									
-								</div>
-							</div>
-
-							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">项目状态</div>
-								<div className="am-u-sm-8 am-u-md-10">
-									<div className="am-btn-group" data-am-button>
-										<button className="am-btn am-btn-default am-btn-xs am-active" onClick = {() => {this.setState({ status: 'unopend' })}}>
-											<input type="radio" name="options" id="unopend"/> 待考察
-										</button>
-										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'underway' })}}>
-											<input type="radio" name="options" id="underway" /> 洽谈中
-										</button>
-										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'paused' })}}>
-											<input type="radio" name="options" id="evaluating" /> 待评估
-										</button>
-										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'canceled' })}}>
-											<input type="radio" name="options" id="paused" /> 暂缓
-										</button>
-										<button className="am-btn am-btn-default am-btn-xs" onClick = {() => {this.setState({ status: 'completed' })}}>
-											<input type="radio" name="options" id="invested" /> 已投资
-										</button>
-									</div>
 								</div>
 							</div>
 
@@ -139,10 +126,10 @@ export default class Adder extends React.Component {
 
 								<div className="am-g am-margin-top">
 									<div className="am-u-sm-4 am-u-md-2 am-text-right">
-										所属部门
+										联系方式
 									</div>
 									<div className="am-u-sm-8 am-u-md-4 am-u-end col-end">
-										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ department: e.target.value }); }}/>
+										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ contact: e.target.value }); }}/>
 									</div>
 								</div>
 
