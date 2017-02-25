@@ -41,9 +41,18 @@ export default class Login extends React.Component {
       return obj;
     }, {});
     var pwd = hex_sha1(data.password);
-    session.authenticate(data.username, pwd).then((sessionId) => {
-      console.log(`Authenticated as ${sessionId}`);
-      this.context.router.push('/');
+    session.authenticate(data.username, pwd).then((user) => {
+      console.log(`Authenticated as ${user.id}`);
+      console.log(user.department);
+      if(user.type === 'staff'){
+        if(user.department === 'hr'){
+          console.log('hr login');
+				this.context.router.push('/admin/users');
+        }
+      }
+      /*else{
+        this.context.router.push('/');
+      }*/
     }, (err) => {
       console.debug(err);
       alert(err);
