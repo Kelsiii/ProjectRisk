@@ -4,7 +4,7 @@ import Table from '../component/table'
 import session from '../../service/session'
 import Client from '../../service/user-client'
 
-export default class Current extends React.Component {
+export default class Users extends React.Component {
   constructor(props) {
     super(props);
 		this.state = {
@@ -61,7 +61,6 @@ export default class Current extends React.Component {
 				</tr>
 			)
 		});
-		console.log(rows);
 		const head = (
 			<tr>
 				<th className="table-id">ID</th>

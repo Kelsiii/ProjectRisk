@@ -13,15 +13,17 @@ import MktController from './controller/mkt-wrapper'
 import CstmController from './controller/clt-wrapper'
 import Apps from './apps/dashboard'
 import Login from './apps/login'
-import Current from './apps/project/current-list'
-import Add from './apps/project/add'
+import Current from './apps/project/my-list'
+import ProjectAdd from './apps/project/add'
 import All from './apps/project/all-list'
+import Unchecked from './apps/project/unchecked-list'
 import Completed from './apps/project/completed-list'
 import Users from './apps/user/user-list'
 import UserAdd from './apps/user/user-add'
 import UserInfo from './apps/user/user-info'
 import Project from './apps/component/project'
-import Clients from './apps/user/client-list'
+import Companies from './apps/user/company-list'
+import CompanyAdd from './apps/user/company-add'
 
 render(
   <Router history={ hashHistory }>
@@ -33,7 +35,7 @@ render(
       <Route path='current' component={Current}/>
       <Route path='all' component={All}/>
       <Route path='completed' component={Completed}/>
-      <Route path='add' component={Add}/>
+      <Route path='add' component={ProjectAdd}/>
       <Route path='users' component={Users}/>
       <Route path='userinfo' component={UserInfo}/>
       <Route path='project/:id' component={Project}/>
@@ -47,9 +49,13 @@ render(
     <Route path='/mkt' component={MktController}>
       <IndexRedirect to="/mkt/apps" />
       <Route path='apps' component={Apps}/>
-      <Route path='client' component={Clients}/>
+      <Route path='company' component={Companies}/>
+      <Route path='company/add' component={CompanyAdd}/>
       <Route path='users' component={Users}/>
       <Route path='userinfo' component={UserInfo}/>
+      <Route path='current' component={Current}/>
+      <Route path='unchecked' component={Unchecked}/>
+      <Route path='all' component={All}/>
     </Route>
   </Router>,
   document.querySelector('.wrapper')

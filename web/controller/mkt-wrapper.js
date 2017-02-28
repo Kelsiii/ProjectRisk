@@ -79,13 +79,12 @@ export default class Wrapper extends React.Component {
                 <li className="admin-parent">
                   <a className="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span className="am-icon-file"></span> 项目 <span className="am-icon-angle-right am-fr am-margin-right"></span></a>
                   <ul className="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                    <li><a href="/#current"><span className="am-icon-hourglass"></span> 待审核<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
-                    <li><a href="/#current"><span className="am-icon-archive"></span> 我的项目<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
-                    <li><a href="/#all" className="am-cf"><span className="am-icon-th"></span> 所有项目<span className="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                    <li><a href="/#add"><span className="am-icon-pencil-square-o"></span> 添加</a></li>
+                    <li><a href="#mkt/unchecked"><span className="am-icon-hourglass"></span> 待审核<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
+                    <li><a href="#mkt/current"><span className="am-icon-archive"></span> 我的项目<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
+                    <li><a href="#mkt/all" className="am-cf"><span className="am-icon-th"></span> 所有项目<span className="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                   </ul>
                 </li>
-                <li><a href="#mkt/client"><span className="am-icon-users"></span> 客户</a></li>
+                <li><a href="#mkt/company"><span className="am-icon-users"></span> 客户</a></li>
                 <li><a href="#mkt/users"><span className="am-icon-user"></span> 员工</a></li>
                 <li><a href="#mkt/userinfo"><span className="am-icon-cogs"></span> 设置</a></li>
                 <li><a href="#"><span className="am-icon-puzzle-piece"></span> 帮助</a></li>
