@@ -6,8 +6,9 @@ const client = new ElasticSearch.Client({
   host: `${host()}/service/es`
 });
 
-const USER = 'risk.user';
-const SESSION = 'risk.id';
+const USER = 'user.username';
+const SESSION = 'user.id';
+const TYPE = 'user.type'
 const DOMAIN = '.riskcon.com';
 
 export default {
@@ -46,11 +47,13 @@ export default {
           if (remember) {
             Cookies.set(USER, json.name, { expires: 1});
 						Cookies.set(SESSION, json.id, { expires: 1});
+						Cookies.set(TYPE, json.department || json.type, { expires: 1});
           } else {
             Cookies.set(USER, json.name);
 						Cookies.set(SESSION, json.id);
+						Cookies.set(TYPE, json.department || json.type);
           }
-          resolve(json.id);
+          resolve(json);
         } else {
           reject(json.error);
         }
@@ -98,6 +101,11 @@ export default {
   id() {
     let id = Cookies.get(SESSION);
     return id;
+  },
+
+  type() {
+    let type = Cookies.get(TYPE);
+    return type;
   },
 
   ip() {
