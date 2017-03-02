@@ -36,6 +36,7 @@ export default class UserAdd extends React.Component {
 			tel: this.state.tel,
 			contact: this.state.contact,
 			address: this.state.address,
+      industry: this.state.industry,
 			intro: this.state.intro,
 			password : 'default',
 			valid : date+' '+now.toTimeString().substring(0,8),

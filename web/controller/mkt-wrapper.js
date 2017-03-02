@@ -80,7 +80,7 @@ export default class Wrapper extends React.Component {
                   <a className="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span className="am-icon-file"></span> 项目 <span className="am-icon-angle-right am-fr am-margin-right"></span></a>
                   <ul className="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
                     <li><a href="#mkt/unchecked"><span className="am-icon-hourglass"></span> 待审核<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
-                    <li><a href="#mkt/current"><span className="am-icon-archive"></span> 我的项目<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
+                    <li><a href="#mkt/my"><span className="am-icon-archive"></span> 我的项目<span className="am-badge am-badge-secondary am-margin-right am-fr">{this.state.currentProject}</span></a></li>
                     <li><a href="#mkt/all" className="am-cf"><span className="am-icon-th"></span> 所有项目<span className="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                   </ul>
                 </li>

@@ -50,10 +50,52 @@ export default class UserInfo extends React.Component {
     if( this.state.pwdConfirm !== '' && !this.state.newMatch ){
       reminder = (<span className="am-icon-warning">两次输入不符</span>)
     }
+    let usertype;
+    switch(user.type){
+      case 'company':
+        usertype = '企业账号'
+        break;
+      case 'staff':
+        usertype = '员工账号'
+        break;
+      default :
+        usertype = '普通账号'
+        break;
+    }
+
+    let UserInfo;
+    if(user.type === 'staff'){
+      UserInfo = (
+        <div className="user-info">
+          <p className="am-text-primary am-text-md">个人信息</p>
+          <p className="user-info-order">
+            姓名：<strong>{user.name || ''}</strong> <br/>
+            部门：<strong>{user.department || ''}</strong> <br/>
+            职位： <strong>{user.position || ''}</strong> <br/>
+            邮箱：<strong>{user.email || ''}</strong> <br/>
+            联系电话：<strong>{user.tel || ''}</strong> <br/>
+          </p>
+        </div>
+      )
+    }
+    if(user.type === 'company'){
+      UserInfo = (
+        <div className="user-info">
+          <p className="am-text-primary am-text-md">个人信息</p>
+          <p className="user-info-order">
+            公司名称：<strong>{user.name || ''}</strong> <br/>
+            主营业务：<strong>{user.industry || ''}</strong> <br/>
+            联系电话：<strong>{user.tel || ''}</strong> <br/>
+            地址： <strong>{user.address || ''}</strong> <br/>
+          </p>
+        </div>
+      )
+    }
+
 		return (
 			<div className="admin-content-body">
         <div className="am-cf am-padding am-padding-bottom-0">
-          <div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">个人设置</strong> / <small>Personal information</small></div>
+          <div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">账号设置</strong> / <small>Personal information</small></div>
         </div>
 
         <hr/>
@@ -66,8 +108,8 @@ export default class UserInfo extends React.Component {
                   <p className="am-text-primary am-text-md">账号信息</p>
                   <p className="user-info-order">
                     ID： <strong>{user.id || ''}</strong> <br/>
-                    账号类型： <strong>普通</strong> <br/>
-                    账号状态： <strong>正常</strong> <br/>
+                    账号类型： <strong>{usertype}</strong> <br/>
+                    账号状态： <strong>{user.status || '正常'}</strong> <br/>
                     账号有效期： <strong>{user.valid || ''}</strong>
                   </p>
                 </div>
@@ -76,16 +118,7 @@ export default class UserInfo extends React.Component {
 
             <div className="am-panel am-panel-default">
               <div className="am-panel-bd">
-                <div className="user-info">
-                  <p className="am-text-primary am-text-md">个人信息</p>
-                  <p className="user-info-order">
-                    姓名：<strong>{user.name || ''}</strong> <br/>
-                    部门：<strong>{user.department || ''}</strong> <br/>
-                    职位： <strong>{user.position || ''}</strong> <br/>
-                    邮箱：<strong>{user.email || ''}</strong> <br/>
-                    联系电话：<strong>{user.tel || ''}</strong> <br/>
-                  </p>
-                </div>
+                {UserInfo}
               </div>
             </div>
 

@@ -9,6 +9,11 @@ const client = new ElasticSearch.Client({
 export default {
   queryUsers(){
 		let filters = { must:[] };
+    filters.must.push({
+      term: {
+        type : 'staff'
+      }
+    })
     let size = 20;
 		return new Promise((resolve, reject) => {
       client.search({
@@ -19,7 +24,7 @@ export default {
             bool: filters
           },
           size,
-					sort: [{ 'date': 'desc' }]
+					sort: [{ 'valid': 'desc' }]
         }
       }).then(resp => {
         if (resp.hits.hits.length) {
@@ -32,6 +37,37 @@ export default {
       })
     })
 	},
+
+  queryCompanies(){
+    let filters = { must:[] };
+    filters.must.push({
+      term: {
+        type : 'company'
+      }
+    })
+    let size = 20;
+		return new Promise((resolve, reject) => {
+      client.search({
+        index: 'management',
+        type: 'user',
+        body: {
+          query: {
+            bool: filters
+          },
+          size,
+					sort: [{ 'valid': 'desc' }]
+        }
+      }).then(resp => {
+        if (resp.hits.hits.length) {
+          resolve(resp.hits.hits.map(hit => hit._source));
+        } else {
+          reject('missing')
+        }
+      }, e => {
+        reject(e.body);
+      })
+    })
+  },
 
 	addUser(user){
 		return new Promise((resolve, reject) => {

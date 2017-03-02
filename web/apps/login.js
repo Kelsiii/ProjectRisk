@@ -46,13 +46,15 @@ export default class Login extends React.Component {
       console.log(user.department);
       if(user.type === 'staff'){
         if(user.department === 'hr'){
-          console.log('hr login');
-				this.context.router.push('/admin/users');
+				  this.context.router.push('/admin/users');
+        }
+        if(user.department === 'mkt'){
+				  this.context.router.push('/mkt');
         }
       }
-      /*else{
-        this.context.router.push('/');
-      }*/
+      else{
+        this.context.router.push('/cstm');
+      }
     }, (err) => {
       console.debug(err);
       alert(err);
