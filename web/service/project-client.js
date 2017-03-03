@@ -25,17 +25,24 @@ export default {
 		let filters = { must:[] };
     let size = 30;
 		if(ctx){
-			if(ctx.type === 'current'){
+			if(ctx.company){
 				filters.must.push({
 					 term: {
-						 status: 'underway'
+						 company : ctx.company
            }
         })
 			}
-      if(ctx.type === 'completed'){
+      if(ctx.owner){
 				filters.must.push({
 					 term: {
-						 status: 'completed'
+						 owner : ctx.owner
+           }
+        })
+			}
+      if(ctx.type === 'unchecked'){
+				filters.must.push({
+					 term: {
+						 status: 'unchecked'
            }
         })
 			}
@@ -59,7 +66,7 @@ export default {
         if (resp.hits.hits.length) {
           resolve(resp.hits.hits.map(hit => hit._source));
         } else {
-          reject('missing')
+          resolve([]);
         }
       }, e => {
         reject(e.body);
@@ -93,6 +100,8 @@ export default {
   },
 
   updateProject(project){
+    let now = new Date;
+    project.lastUpdated = now.toLocaleDateString().replace(/\//g,"-")+' '+now.toTimeString().substring(0,8);
     return new Promise((resolve, reject) => {
       client.update({
         index: 'management',

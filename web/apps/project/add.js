@@ -11,9 +11,10 @@ export default class Adder extends React.Component {
 			industry : 'finance',
 			value: 0,
 			status: 'unfinished',
-			date: '',
-			owner: session.username(),
+			company: session.id(),
+			companyName: session.username(),
 			contact: '',
+			contactor: '',
 			description: ''
 		}
   };
@@ -26,16 +27,38 @@ export default class Adder extends React.Component {
 			industry : this.state.industry,
 			value: this.state.value,
 			status: this.state.status,
-			date: this.state.date,
-			owner: this.state.owner,
+			company: this.state.company,
+			companyName: this.state.companyName,
 			contact: this.state.contact,
+			contactor: this.state.contactor,
 			description: this.state.description,
-			'created' : now.toLocaleDateString().replace(/\//g,"-")+' '+now.toTimeString().substring(0,8)
+			'created' : now.toLocaleDateString().replace(/\//g,"-")+' '+now.toTimeString().substring(0,8),
+			liquidityRisk: {
+				liquidAssets: '',
+				currentLiabilities: '',
+				coreLiabilities: '',
+				totalLiabilities: '',
+				liquidGap: '',
+				assets90: ''
+			},
+			profitability: {
+				operatingExpenses: '',
+				operatingReceipt: '',
+				retainedProfits: '',
+				averageAssets: '',
+				averageProfits: ''
+			},
+			capitalAdequacy: {
+				netCapital: '',
+				coreNetCapital: '',
+				riskWeightedAssets: '',
+				marketRiskAssets: ''
+			}
 		};
 		Client.addProject(project).then(resp => {
 			if(resp.created === true){
 				alert('创建成功');
-				this.context.router.push('/all');
+				this.context.router.push('/cstm/unfinished');
 			}
 			
 		});
@@ -59,57 +82,58 @@ export default class Adder extends React.Component {
 
 					<div className="am-tabs-bd">
 						<div className="am-tab-panel am-fade am-in am-active" id="tab1">
-							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">
-									项目名称
+							<form className="am-form">
+								<div className="am-g am-margin-top">
+									<div className="am-u-sm-4 am-u-md-2 am-text-right">
+										项目名称
+									</div>
+									<div className="am-u-sm-8 am-u-md-8 am-u-lg-4 am-u-end col-end">
+										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ name: e.target.value }); }}/>
+									</div>
 								</div>
-								<div className="am-u-sm-8 am-u-md-5 am-u-lg-3">
-									<input type="text" className="am-input-lg" onChange={ e => { this.setState({ name: e.target.value }); }}/>
+								
+								<div className="am-g am-margin-top">
+									<div className="am-u-sm-4 am-u-md-2 am-text-right">
+										申报金额
+									</div>
+									<div className="am-u-sm-8 am-u-md-8 am-u-lg-4 am-u-end col-end">
+										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ value: e.target.value }); }}/>
+									</div>
 								</div>
-							</div>
-							
-							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">
-									申报金额
-								</div>
-								<div className="am-u-sm-8 am-u-md-5 am-u-lg-3">
-									<input type="text" className="am-input-lg" onChange={ e => { this.setState({ value: e.target.value }); }}/>
-								</div>
-							</div>
 
-							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">所属行业</div>
-								<div className="am-u-sm-8 am-u-md-10 am-lg-10">
-									<FormGroup controlId='spec'>
-									<FormControl componentClass='select' value={this.state.industry} style={ {width: '150px'} }
-									onChange={e => { this.setState({ industry: e.target.value }); }}>
-										<option value="finance">金融证券</option>
-										<option value="technology">高新技术</option>
-										<option value="energy">新能源</option>
-										<option value="IT">信息产业</option>
-										<option value="entertainment">文体娱乐</option>
-										<option value="education">教育</option>
-										<option value="foreign">外资合作</option>
-									</FormControl>
-								</FormGroup>
-									
+								<div className="am-g am-margin-top">
+									<div className="am-u-sm-4 am-u-md-2 am-text-right">
+										申报企业
+									</div>
+									<div className="am-u-sm-8 am-u-md-10 am-u-lg-6 am-u-end col-end">
+										<input type="text" className="am-input-sm" value={this.state.companyName} disabled />
+									</div>
 								</div>
-							</div>
 
-							<div className="am-g am-margin-top">
-								<div className="am-u-sm-4 am-u-md-2 am-text-right">
-									启动日期
+								<div className="am-g am-margin-top">
+									<div className="am-u-sm-4 am-u-md-2 am-text-right">所属行业</div>
+									<div className="am-u-sm-8 am-u-md-10 am-lg-10">
+										<FormGroup controlId='spec'>
+										<FormControl componentClass='select' value={this.state.industry} style={ {width: '310px', fontSize: '15px'} }
+										onChange={e => { this.setState({ industry: e.target.value }); }}>
+											<option value="finance">金融业</option>
+											<option value="technology">科学研究/技术服务</option>
+											<option value="construction">建筑/房地产/租赁和商务服务</option>
+											<option value="agriculture">农、林、牧、渔业</option>
+											<option value="manufacturing">制造业</option>
+											<option value="energy">电力、热力、燃气及水生产和供应</option>
+											<option value="IT">信息传输/软件/信息技术服务</option>
+											<option value="entertainment">文化/体育/娱乐</option>
+											<option value="education">教育</option>
+											<option value="foreign">外资合作</option>
+											<option value="others">其他</option>
+										</FormControl>
+									</FormGroup>
+										
+									</div>
 								</div>
-								<div className="am-u-sm-8 am-u-md-10">
-									<form action="" className="am-form am-form-inline">
-										<div className="am-form-group am-form-icon">
-											<i className="am-icon-calendar"></i>
-											<input type="date" className="am-form-field am-input-sm" placeholder="日期" onChange={ e => { this.setState({ date: e.target.value }); }}/>
-										</div>
-									</form>
-								</div>
-							</div>
 
+							</form>
 						</div>
 
 						<div className="am-tab-panel am-fade" id="tab2">
@@ -120,7 +144,7 @@ export default class Adder extends React.Component {
 										负责人
 									</div>
 									<div className="am-u-sm-8 am-u-md-4 am-u-end col-end">
-										<input type="text" className="am-input-sm" value={this.state.owner} onChange={ e => { this.setState({ owner: e.target.value }); }}/>
+										<input type="text" className="am-input-sm" onChange={ e => { this.setState({ contactor: e.target.value }); }}/>
 									</div>
 								</div>
 
