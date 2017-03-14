@@ -51,6 +51,9 @@ export default class Login extends React.Component {
         if(user.department === 'mkt'){
 				  this.context.router.push('/mkt');
         }
+        if(user.department === 'investment'){
+				  this.context.router.push('/dcs');
+        }
       }
       else{
         this.context.router.push('/cstm');
