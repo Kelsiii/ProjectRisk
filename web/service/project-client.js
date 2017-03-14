@@ -22,7 +22,7 @@ export default {
   },
 
 	queryProjects(ctx){
-		let filters = { must:[] };
+		let filters = { must:[], must_not:[] };
     let size = 30;
 		if(ctx){
 			if(ctx.company){
@@ -46,8 +46,33 @@ export default {
            }
         })
 			}
-      if(ctx.type === 'homepage'){
-        size = 5
+      if(ctx.type === 'unevaluated'){
+				filters.must.push({
+					 term: {
+						 status: 'evaluating'
+           }
+        })
+			}
+      if(ctx.type === 'invested'){
+				filters.must.push({
+					 term: {
+						 status: 'invested'
+           }
+        })
+			}
+      if(ctx.type === 'submitted'){
+        filters.must_not.push({
+          term: {
+            status: 'unfinished'
+          }
+        })
+      }
+      if(ctx.type === 'unfinished'){
+        filters.must.push({
+					 term: {
+						 status: 'unfinished'
+           }
+        })
       }
 		}
 

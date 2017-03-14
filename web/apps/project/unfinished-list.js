@@ -41,6 +41,9 @@ export default class Unfinished extends React.Component {
 				case 'paused':
 					status = '暂缓投资'
 					break;
+				case 'unqualified':
+					status = '风险过高'
+					break;
 				default:
 					status = 'unknown'
 					break;
@@ -88,13 +91,13 @@ export default class Unfinished extends React.Component {
 			return (
 				<tr key={'row'+i}>
 					<td>{i+1}</td>
-					<td><a href={`#/project/${project.id}`}>{project.name}</a></td>
+					<td><a href={`#/cstm/project/${project.id}`}>{project.name}</a></td>
 					<td>{project.companyName}</td>
 					<td>{industry}</td>
 					<td>{project.value}</td>
 					<td>{status}</td>
 					<td>
-						<Link to={`/project/${project.id}`}><button className="am-btn am-btn-default am-btn-xs" data-am-dropdown-toggle><span className="am-icon-cog"></span> </button></Link>	
+						<Link to={`cstm/project/${project.id}`}><button className="am-btn am-btn-default am-btn-xs" data-am-dropdown-toggle><span className="am-icon-cog"></span> </button></Link>	
 					</td>
 				</tr>
 			)

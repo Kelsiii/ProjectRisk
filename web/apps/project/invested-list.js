@@ -4,7 +4,7 @@ import Client from '../../service/project-client'
 import List from '../component/list'
 import session from '../../service/session'
 
-export default class All extends React.Component {
+export default class Invested extends React.Component {
   constructor(props) {
     super(props);
 		this.state = {
@@ -13,10 +13,7 @@ export default class All extends React.Component {
   };
 
 	componentDidMount() {
-		let ctx = {};
-		if(session.type() === 'company'){
-			ctx.company = session.id();
-		}
+		let ctx = { type: 'invested' };
 		Client.queryProjects(ctx).then( projects => {
 			this.setState({
 				projects
@@ -94,7 +91,7 @@ export default class All extends React.Component {
 			return (
 				<tr key={'row'+i}>
 					<td>{i+1}</td>
-					<td><a href={`#/project/${project.id}`}>{project.name}</a></td>
+					<td><a href={`#/mkt/project/${project.id}`}>{project.name}</a></td>
 					<td>{project.companyName}</td>
 					<td>{industry}</td>
 					<td>{project.value}</td>
@@ -121,7 +118,7 @@ export default class All extends React.Component {
 		return (
 			<div className="admin-content-body">
 				<div className="am-cf am-padding">
-					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目</strong> / <small>全部</small></div>
+					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目</strong> / <small>待审核</small></div>
 				</div>
 
 				<div className="am-g">

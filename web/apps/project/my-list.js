@@ -47,6 +47,9 @@ export default class My extends React.Component {
 				case 'paused':
 					status = '暂缓投资'
 					break;
+				case 'unqualified':
+					status = '风险过高'
+					break;
 				default:
 					status = 'unknown'
 					break;
@@ -121,7 +124,7 @@ export default class My extends React.Component {
 		return (
 			<div className="admin-content-body">
 				<div className="am-cf am-padding">
-					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目</strong> / <small>进行中</small></div>
+					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目</strong> / <small>我的项目</small></div>
 				</div>
 
 				<div className="am-g">
