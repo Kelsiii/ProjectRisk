@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import {FormGroup, FormControl} from 'react-bootstrap'
-import Client from '../../service/project-client'
+import ProjectClient from '../../service/project-client'
+import RiskClient from '../../service/risk-client'
 import session from '../../service/session'
 
 export default class Project extends React.Component {
@@ -12,7 +13,7 @@ export default class Project extends React.Component {
   };
 
 	componentDidMount() {
-    Client.fetchProject(this.props.params.id).then(project => {
+    ProjectClient.fetchProject(this.props.params.id).then(project => {
 			this.setState({
 				project
 			})
@@ -33,7 +34,7 @@ export default class Project extends React.Component {
 		if(this.state.contactor){
 			project.contactor = this.state.contactor;
 		}
-		Client.updateProject(project).then(resp => {
+		ProjectClient.updateProject(project).then(resp => {
 			alert('修改成功！');
 		});
 
@@ -50,7 +51,7 @@ export default class Project extends React.Component {
 		}
 		let project = this.state.project;
 		project.liquidityRisk = liquidityRisk;
-		Client.updateProject(project).then(resp => {
+		ProjectClient.updateProject(project).then(resp => {
 			alert('修改成功！');
 		});
 	}
@@ -65,7 +66,7 @@ export default class Project extends React.Component {
 		}
 		let project = this.state.project;
 		project.profitability = profitability;
-		Client.updateProject(project).then(resp => {
+		ProjectClient.updateProject(project).then(resp => {
 			alert('修改成功！');
 		});
 	}
@@ -79,8 +80,22 @@ export default class Project extends React.Component {
 		}
 		let project = this.state.project;
 		project.capitalAdequacy = capitalAdequacy;
-		Client.updateProject(project).then(resp => {
+		ProjectClient.updateProject(project).then(resp => {
 			alert('修改成功！');
+		});
+	}
+
+	handleSubmit() {
+		let project = this.state.project;
+		let riskValues = RiskClient.riskCalculator(project);
+		project.riskValues = riskValues;
+		if(RiskClient.highRisk(riskValues)){
+			project.status = 'unqualified';
+		} else {
+			project.status = 'unchecked';
+		}
+		ProjectClient.updateProject(project).then(resp => {
+			this.context.router.push('/cstm/submitted');
 		});
 	}
 
@@ -136,6 +151,8 @@ export default class Project extends React.Component {
 			<div className="admin-content-body">
 				<div className="am-cf am-padding am-padding-bottom-0">
 					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目完善</strong> / <small>{project.name || 'loading...'}</small></div>
+					<button type="button" className="am-btn am-btn-secondary am-btn-xs am-fr" 
+									onClick={()=>{this.handleSubmit()}}>提交审核</button>
 				</div>
 
 				<hr/>
@@ -229,7 +246,7 @@ export default class Project extends React.Component {
 									</div>
 									<div className="am-u-sm-8 am-u-md-9 am-u-end col-end">
 										<input type="text" className="am-input-sm" value={this.state.contact || project.contact || ''}
-										 onChange={ e => { this.setState({ contactor: e.target.value }); }}/>
+										 onChange={ e => { this.setState({ contact: e.target.value }); }}/>
 									</div>
 								</div>
 
@@ -246,12 +263,10 @@ export default class Project extends React.Component {
 									</div>
 								</div>
 
-								
 
-								<div className="am-margin am-btn-group-margin" >
+								<div className="am-margin am-btn-group-margin" style={{padding: "0 300px"}}>
 									<button type="button" className="am-btn am-btn-primary am-btn-xs" 
 									disabled={!(project.status==='unfinished' || project.status==='unchecked')} onClick = {()=>{this.handleProjectUpdate()}}>提交修改</button>
-									<button type="button" className="am-btn am-btn-primary am-btn-xs">放弃修改</button>
 								</div>
 							</div>
 						</div>
@@ -347,7 +362,7 @@ export default class Project extends React.Component {
 									</div>
 									<div className="am-u-sm-8 am-u-md-7">
 										<input type="text" className="am-input-sm" 
-										value={this.state.operatingExpenses || project.profitability.liquidAssets || ''}
+										value={this.state.operatingExpenses || project.profitability.operatingExpenses || ''}
 										onChange={ e => { this.setState({ operatingExpenses : e.target.value }); }}/>
 									</div>
 								</div>
@@ -397,7 +412,8 @@ export default class Project extends React.Component {
 								</div>
 
 								<div className="am-margin" style={{padding: "0 270px"}}>
-									<button type="button" className="am-btn am-btn-primary am-btn-xs" onClick={()=>{this.handleProfitabilityUpdate()}}>提交保存</button>
+									<button type="button" className="am-btn am-btn-primary am-btn-xs" 
+									onClick={()=>{this.handleProfitabilityUpdate()}}>提交保存</button>
 								</div>
 							</div>
 						</div>
@@ -453,7 +469,8 @@ export default class Project extends React.Component {
 								</div>
 
 								<div className="am-margin" style={{padding: "0 225px"}}>
-									<button type="button" className="am-btn am-btn-primary am-btn-xs" onClick={()=>{this.handleAdd()}}>提交保存</button>
+									<button type="button" className="am-btn am-btn-primary am-btn-xs" 
+									onClick={()=>{this.handleCapitalAdequacyUpdate()}}>提交保存</button>
 								</div>
 							</div>
 						</div>
@@ -464,4 +481,7 @@ export default class Project extends React.Component {
     	</div>
 		)
   }
+}
+Project.contextTypes = {
+  router: PropTypes.object.isRequired
 }
