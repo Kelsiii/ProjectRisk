@@ -7,35 +7,40 @@ const client = new ElasticSearch.Client({
 });
 
 export default {
-  queryUsers(){
+	queryUsers(){
 		let filters = { must:[] };
-    filters.must.push({
-      term: {
-        type : 'staff'
-      }
-    })
-    let size = 20;
-		return new Promise((resolve, reject) => {
-      client.search({
-        index: 'management',
-        type: 'user',
-        body: {
-          query: {
-            bool: filters
-          },
-          size,
-					sort: [{ 'valid': 'desc' }]
-        }
-      }).then(resp => {
-        if (resp.hits.hits.length) {
-          resolve(resp.hits.hits.map(hit => hit._source));
-        } else {
-          reject('missing')
-        }
-      }, e => {
-        reject(e.body);
-      })
-    })
+		filters.must.push({
+			term: {
+				type : 'staff'
+			}
+		});
+		filters.must.push({
+			term: {
+				status : '正常'
+			}
+		});
+		let size = 20;
+			return new Promise((resolve, reject) => {
+		client.search({
+			index: 'management',
+			type: 'user',
+			body: {
+				query: {
+					bool: filters
+				},
+				size,
+				sort: [{ 'valid': 'desc' }]
+			}
+		}).then(resp => {
+			if (resp.hits.hits.length) {
+				resolve(resp.hits.hits.map(hit => hit._source));
+			} else {
+				reject('missing')
+			}
+			}, e => {
+				reject(e.body);
+			})
+		})
 	},
 
   queryCompanies(){

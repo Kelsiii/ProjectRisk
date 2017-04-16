@@ -21,6 +21,15 @@ export default class Users extends React.Component {
 		});
 	}
 
+	handleDelete(user) {
+		user.status = 'disabled';
+		Client.updateUser(user).then(resp => {
+		if(resp){
+				location.reload();
+			}
+		})
+	}
+
 	render() {
 		let users = this.state.users;
 		if(this.state.department && this.state.department !== 'all'){
@@ -54,7 +63,7 @@ export default class Users extends React.Component {
 						<div className="am-btn-toolbar">
 							<div className="am-btn-group am-btn-group-xs">
 								<button className="am-btn am-btn-default am-btn-xs am-text-secondary" disabled={session.type() !== 'hr'}><span className="am-icon-pencil-square-o"></span> 编辑</button>
-								<button className="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" disabled={session.type() !== 'hr'}><span className="am-icon-trash-o"></span> 删除</button>
+								<button className="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onClick={()=>{this.handleDelete(user)}} disabled={session.type() !== 'hr'}><span className="am-icon-trash-o"></span> 删除</button>
 							</div>
 						</div>
 					</td>

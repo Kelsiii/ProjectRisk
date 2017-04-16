@@ -62,6 +62,20 @@ export default class UserInfo extends React.Component {
         usertype = '普通账号'
         break;
     }
+    let department;
+    if(user.department){
+      switch(user.department){
+        case 'hr':
+          department = '人事部'
+          break;
+        case 'mkt':
+          department = '市场部'
+          break;
+        case 'investment':
+          department = '投资决策部'
+          break;
+      }
+    }
 
     let UserInfo;
     if(user.type === 'staff'){
@@ -70,7 +84,7 @@ export default class UserInfo extends React.Component {
           <p className="am-text-primary am-text-md">个人信息</p>
           <p className="user-info-order">
             姓名：<strong>{user.name || ''}</strong> <br/>
-            部门：<strong>{user.department || ''}</strong> <br/>
+            部门：<strong>{department || ''}</strong> <br/>
             职位： <strong>{user.position || ''}</strong> <br/>
             邮箱：<strong>{user.email || ''}</strong> <br/>
             联系电话：<strong>{user.tel || ''}</strong> <br/>
@@ -138,6 +152,10 @@ export default class UserInfo extends React.Component {
                       this.setState({
                         pwdMatch : true,
                       })
+                    } else {
+                      this.setState({
+                        pwdMatch : false
+                      })
                     }
                   }} 
                   />
@@ -156,6 +174,10 @@ export default class UserInfo extends React.Component {
                       this.setState({
                         pwdValid : true
                       })
+                    } else {
+                      this.setState({
+                        pwdValid : false
+                      })
                     }
                   }}/>
                 </div>
@@ -173,6 +195,10 @@ export default class UserInfo extends React.Component {
                       this.setState({
                         newMatch : true
                       })
+                    } else {
+                      this.setState({
+                        newMatch : false
+                      })
                     }
                   }}/>
                   <p style={{color:'red'}}>{reminder}</p>
@@ -182,7 +208,7 @@ export default class UserInfo extends React.Component {
               <div className="am-form-group">
                 <div className="am-u-sm-9 am-u-sm-push-3">
                   <button type="button" 
-                  disabled={!(this.state.pwdMatch || this.state.newMatch || this.state.pwdValid)} 
+                  disabled={!(this.state.pwdMatch && this.state.newMatch && this.state.pwdValid)} 
                   className="am-btn am-btn-primary"
                   onClick = {() => {this.handleUpdate()}}
                   >保存修改</button>

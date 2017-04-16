@@ -123,7 +123,7 @@ export default class Check extends React.Component {
 			<div className="admin-content-body">
 				<div className="am-cf am-padding am-padding-bottom-0">
 					<div className="am-fl am-cf"><strong className="am-text-primary am-text-lg">项目详情</strong> / <small>{project.name || 'loading...'}</small></div>
-					<button type="button" className="am-btn am-btn-secondary am-btn-xs am-fr" 
+					<button type="button" className="am-btn am-btn-secondary am-btn-xs am-fr" style={{display:session.type() === 'mkt'? 'block':'none'}}
 									onClick={()=>{this.passCheck()}}>审核通过</button>
 				</div>
 
@@ -159,6 +159,15 @@ export default class Check extends React.Component {
 									</div>
 									<div className="am-u-sm-8 am-u-md-9 am-u-end col-end">
 										{project.value || '无'}
+									</div>
+								</div>
+
+								<div className="am-g am-margin-top">
+									<div className="am-u-sm-4 am-u-md-3 am-text-right">
+										投资金额
+									</div>
+									<div className="am-u-sm-8 am-u-md-9 am-u-end col-end">
+										{project.investmentValue || '无'}
 									</div>
 								</div>
 

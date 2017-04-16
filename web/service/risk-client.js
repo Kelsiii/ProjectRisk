@@ -57,5 +57,30 @@ export default {
 		} else{
 			return false;
 		}
+	},
+
+	riskAnalysis(values){
+		let differenceValue = {
+			liquidityRatio:0,
+			coreDebtDependency:0,
+			liquidityGapRate:0,
+			costIncomeRatio:0,
+			returnOnAssets:0,
+			returnOfEquity:0,
+			capitalRatio:0,
+			coreCapitalRatio:0
+		}
+
+		differenceValue.liquidityRatio = values.liquidityRatio - 25;
+		differenceValue.coreDebtDependency = values.coreDebtDependency - 60;
+		differenceValue.liquidityGapRate = values.liquidityGapRate + 10;
+		differenceValue.costIncomeRatio = 35 - values.costIncomeRatio;
+		differenceValue.returnOnAssets = values.returnOnAssets - 0.6;
+		differenceValue.returnOfEquity = values.returnOfEquity - 11;
+		differenceValue.capitalRatio = values.capitalRatio - 8;
+		differenceValue.coreCapitalRatio = values.coreCapitalRatio - 4;
+
+		return differenceValue;
+
 	}
 }

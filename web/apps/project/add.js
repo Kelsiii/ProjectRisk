@@ -105,7 +105,7 @@ export default class Adder extends React.Component {
 									<div className="am-u-sm-4 am-u-md-2 am-text-right">
 										申报企业
 									</div>
-									<div className="am-u-sm-8 am-u-md-10 am-u-lg-6 am-u-end col-end">
+									<div className="am-u-sm-8 am-u-md-8 am-u-lg-4 am-u-end col-end">
 										<input type="text" className="am-input-sm" value={this.state.companyName} disabled />
 									</div>
 								</div>
